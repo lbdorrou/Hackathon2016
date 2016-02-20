@@ -71,8 +71,9 @@ $( document ).ready(function() {
 
 
      var email= localStorage.getItem("username");
-     var brew_id = localStorage.getItem("brew_id");
-      $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
+     var brew_id = localStorage.getItem("brewId");
+     
+      $.get( "http://dev2.ldorrough.com/brews/" + brew_id, function( data ) {
        jQuery.each(data, function() {
               console.log(this)
               $("#jsonDump").append(   '<span  class="pull-left fa-stack fa">' + 
