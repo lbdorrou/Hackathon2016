@@ -56,23 +56,40 @@
            
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
-    
-    $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
-         jQuery.each(data, function() {
-                console.log(this)
-                $("#jsonDump").append(   '<span  class="pull-left fa-stack fa">' + 
+      var email= localStorage.getItem("username");
+    $.get( "http://dev2.ldorrough.com/checkins?search=" + email, function( data ) {
+       jQuery.each(data, function() {
+          // alert(data);
+          stars =  '<div class="stars">'
+          for(var i=0; i< 5; i++)
+          {
+            if(this.rating > i && this.rating > i+.5)
+                stars+= ' <span class="star on"></span>'
+            // else if(this.rating >= i && this.rating < i+1)
+            //        stars+=      '<span class="star half"></span>'
+            else
+                  stars+=       '<span class="star"></span>'
+                        
+          }
+          stars += '</div>'
+           $("#jsonDump").append(
+               '<div class="checkin">' + 
+                    '<div class="checkInTitle">' + 
+                    '<span class="fa-stack fa">' + 
                       '<i style="color:#4E342E "  class="fa fa-circle fa-stack-2x"></i>' + 
-                      '<i class="fa fa-coffee  fa-stack-1x fa-inverse"></i>' + 
+                      '<i class="fa fa-user  fa-stack-1x fa-inverse"></i>' + 
                     '</span>' + 
+                       '<span>&nbsp;&nbsp;' + this.email + '</span>' + 
+                             '</div>' + 
                     '<div class="checkInBody">' + 
-                        '<span class="checkInName" >' + this.name + '</span><br/>' + 
-                        '<span class="cafe">' + this.bType + ' </span>' + 
-                        '<span class="cafe">by ' + this.cafe+ '</span> ' + 
-                     '</div>' )
-            });
-          
-        });
-   
+                        '<span class="checkInName" >' + this.brew.name + '</span><br/>' + 
+                        '<span class="cafe">by ' + this.brew.cafe+ '</span>' + 
+                        stars+
+                     '</div>' + 
+                '</div>')
+       });
+     });
+
     
 });
 

@@ -45,7 +45,13 @@
         
        <div id="navPartial"></div>
         <H1>New Check In</H1>
-        <div id="jsonDump"></div>
+           <form >
+           <div id="jsonDump"></div>
+     
+     
+          </div>
+          <button onclick="createCheckIn()" class="btn btn-default">Submit</button>
+        </form>
   <div class="rateit">
   </div>
 
@@ -54,6 +60,10 @@
 </html>
 
 <script>
+
+function createCheckIn() {
+  // body...
+}
            
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
@@ -61,7 +71,22 @@ $( document ).ready(function() {
 
 
      var email= localStorage.getItem("username");
-       
+     var brew_id = localStorage.getItem("brew_id");
+      $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
+       jQuery.each(data, function() {
+              console.log(this)
+              $("#jsonDump").append(   '<span  class="pull-left fa-stack fa">' + 
+                    '<i style="color:#4E342E "  class="fa fa-circle fa-stack-2x"></i>' + 
+                    '<i class="fa fa-coffee  fa-stack-1x fa-inverse"></i>' + 
+                  '</span>' + 
+                  '<div class="checkInBody">' + 
+                      '<span class="checkInName" >' + this.name + '</span><br/>' + 
+                      '<span class="cafe">' + this.bType + ' </span>' + 
+                      '<span class="cafe">by ' + this.cafe+ '</span> ' + 
+                   '</div>' )
+          });
+        
+      });
      // $.get( "http://dev2.ldorrough.com/checkins?search=" + email, function( data ) {
      //   jQuery.each(data, function() {
      //      // alert(data);

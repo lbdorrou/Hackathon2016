@@ -61,7 +61,7 @@ $( document ).ready(function() {
 
      var email= localStorage.getItem("username");
        
-     $.get( "http://dev2.ldorrough.com/checkins?search=" + email, function( data ) {
+     $.get( "http://dev2.ldorrough.com/checkins", function( data ) {
        jQuery.each(data, function() {
           // alert(data);
           stars =  '<div class="stars">'
@@ -69,8 +69,8 @@ $( document ).ready(function() {
           {
             if(this.rating > i && this.rating > i+.5)
                 stars+= ' <span class="star on"></span>'
-            else if(this.rating >= i && this.rating < i+1)
-                   stars+=      '<span class="star half"></span>'
+            // else if(this.rating >= i && this.rating < i+1)
+            //        stars+=      '<span class="star half"></span>'
             else
                   stars+=       '<span class="star"></span>'
                         
@@ -83,8 +83,7 @@ $( document ).ready(function() {
                       '<i style="color:#4E342E "  class="fa fa-circle fa-stack-2x"></i>' + 
                       '<i class="fa fa-user  fa-stack-1x fa-inverse"></i>' + 
                     '</span>' + 
-                       '<span>' + this.email + '</span>' + 
-                       '<span class="pull-right">'  + this.created_at + ' </span>' + 
+                       '<span>&nbsp;' + this.email + '</span>' + 
                              '</div>' + 
                     '<div class="checkInBody">' + 
                         '<span class="checkInName" >' + this.brew.name + '</span><br/>' + 
