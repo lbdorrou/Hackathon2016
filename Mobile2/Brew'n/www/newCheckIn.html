@@ -30,6 +30,7 @@
         
        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="jquery.rateit.min.js">
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
@@ -47,7 +48,9 @@
         <H1>New Check In</H1>
            <form >
            <div id="jsonDump"></div>
-     
+           <div class="checkInBody">
+                  <input type="number" id="replyNumber" min="0" max="5"  />
+
      
           </div>
           <button onclick="createCheckIn()" class="btn btn-default">Submit</button>
@@ -62,7 +65,16 @@
 <script>
 
 function createCheckIn() {
-  // body...
+  rating = $("#replyNumber").val()
+ var email= localStorage.getItem("username");
+      var brew_id = localStorage.getItem("brewId");
+
+  $.ajax({
+    type: "POST",
+    url:  "http://dev2.ldorrough.com/checkins",
+    data: '{"checkin":{"email":"' +email  + '", "brew_id":"'+ brew_id+ '", "rating":' + rating + '}}',
+    contentType:"application/json",
+  });
 }
            
 $( document ).ready(function() {
@@ -72,20 +84,19 @@ $( document ).ready(function() {
 
      var email= localStorage.getItem("username");
      var brew_id = localStorage.getItem("brewId");
-     
+     console.log(brew_id)
       $.get( "http://dev2.ldorrough.com/brews/" + brew_id, function( data ) {
-       jQuery.each(data, function() {
-              console.log(this)
+       // jQuery.each(data, function() {
               $("#jsonDump").append(   '<span  class="pull-left fa-stack fa">' + 
                     '<i style="color:#4E342E "  class="fa fa-circle fa-stack-2x"></i>' + 
                     '<i class="fa fa-coffee  fa-stack-1x fa-inverse"></i>' + 
                   '</span>' + 
                   '<div class="checkInBody">' + 
-                      '<span class="checkInName" >' + this.name + '</span><br/>' + 
-                      '<span class="cafe">' + this.bType + ' </span>' + 
-                      '<span class="cafe">by ' + this.cafe+ '</span> ' + 
+                      '<span class="checkInName" >' + data.name + '</span><br/>' + 
+                      '<span class="cafe">' + data.bType + ' </span>' + 
+                      '<span class="cafe">by ' + data.cafe+ '</span> ' + 
                    '</div>' )
-          });
+       //    });
         
       });
      // $.get( "http://dev2.ldorrough.com/checkins?search=" + email, function( data ) {
