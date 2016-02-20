@@ -23,6 +23,7 @@
       
         
        <div id="navPartial"></div>
+         <div class="container">
         <H1>Create Brew</H1>
         <form >
           <div class="form-group" >
@@ -43,6 +44,7 @@
           </div>
           <button onclick="createBrew()" class="btn btn-default">Submit</button>
         </form>
+        </div>
         
     </body>
 </html>
@@ -59,7 +61,7 @@ function createBrew() {
       data: '{"brew":{"name":"' + brewName+'", "cafe":"' +cafe  + '", "roast":"' + roast + '", "bType":"' + bType + '"}}',
       contentType:"application/json",
     });
-​    
+  
 }    
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
