@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/default.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        
+       
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <title>Brew'n</title>
+    </head>
+    
+    <body>
+       
+      
+        
+       <div id="navPartial"></div>
+        <H1>Create Brew</H1>
+        <form >
+          <div class="form-group" >
+            <label for="exampleInputEmail1">Name</label>
+            <input type="name" class="form-control" id="Name" placeholder="Name">
+          </div>
+         <div class="form-group">
+            <label for="exampleInputEmail1">Cafe</label>
+            <input type="cafe" class="form-control" id="Cafe" placeholder="Cafe">
+          </div>
+            <div class="form-group">
+            <label for="exampleInputEmail1">Roast</label>
+            <input type="roast" class="form-control" id="Roast" placeholder="Roast">
+          </div>
+              <div class="form-group">
+            <label for="exampleInputEmail1">Brew Type</label>
+            <input type="bType" class="form-control" id="Type" placeholder="Brew Type">
+          </div>
+          <button onclick="createBrew()" class="btn btn-default">Submit</button>
+        </form>
+        
+    </body>
+</html>
+
+<script>
+function createBrew() {
+    cafe =  $("#Cafe").val()
+    roast = $("#Roast").val()
+    brewName = $("#Name").val()
+    bType =$("#Type").val()
+    $.ajax({
+      type: "POST",
+      url:  "http://dev2.ldorrough.com/brews",
+      data: '{"brew":{"name":"' + brewName+'", "cafe":"' +cafe  + '", "roast":"' + roast + '", "bType":"' + bType + '"}}',
+      contentType:"application/json",
+    });
+​    
+}    
+$( document ).ready(function() {
+   $( "#navPartial" ).load( "nav.html" );
+    
+    // $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
+    //      jQuery.each(data, function() {
+    //             console.log(this)
+    //             $("#jsonDump").append(   '<span  class="pull-left fa-stack fa">' + 
+    //                   '<i style="color:#4E342E "  class="fa fa-circle fa-stack-2x"></i>' + 
+    //                   '<i class="fa fa-coffee  fa-stack-1x fa-inverse"></i>' + 
+    //                 '</span>' + 
+    //                 '<div class="checkInBody">' + 
+    //                     '<span class="checkInName" >' + this.name + '</span><br/>' + 
+    //                     '<span class="cafe">' + this.bType + ' </span>' + 
+    //                     '<span class="cafe">by ' + this.cafe+ '</span> ' + 
+    //                  '</div>' )
+    //         });
+          
+    //     });
+   
+    
+});
+
+
+</script>
