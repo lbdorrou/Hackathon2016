@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_checkIn"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Check In" />
+        <item
+            android:id="@+id/nav_cafes"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Cafes" />
+        <item
+            android:id="@+id/nav_brews"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Brews" />
+
+        <item
+            android:id="@+id/nav_myBrews"
+            android:icon="@drawable/ic_menu_send"
+            android:title="My Brews" />
+
+    </group>
+
+</menu>
