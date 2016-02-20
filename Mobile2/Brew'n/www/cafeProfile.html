@@ -87,12 +87,14 @@ $( document ).ready(function() {
          $("#cafeMap").attr("src","https://www.google.com/maps/embed/v1/place?key=AIzaSyALWia9fQBmsa52pKCaV6QVbpnTTDq05ZQ&q=" + convertToSlug(data.location))
          $("#cafeName").html(data.name);
          
-         var newQuery = "http://dev2.ldorrough.com/brews?serach=" + data.name;
+         var newQuery = "http://dev2.ldorrough.com/brews?search=" + data.name;
+         console.log(newQuery);
          
          $.get( newQuery, function( data ) {
+             console.log(data);
              $("#jsonDump").empty();
              for(i = 0; i < data.length; i++){
-                $("#jsonDump").append(" <button type='button' class='list-group-item'>" + data[i].name + "</button>");
+                $("#jsonDump").append(" <button onclick='loadPage(" + data[i].id + ");' type='button' class='list-group-item'>" + data[i].name + "</button>");
          }
         
     });
@@ -118,6 +120,11 @@ function convertToSlug(Text)
     
     
     
+    function loadPage(id){
+        localStorage.setItem('brewId', id);
+        window.location.href = "brewProfile.html";
+        
+    }
 
 
 </script>
