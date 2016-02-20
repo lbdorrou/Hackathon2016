@@ -39,12 +39,22 @@
     </head>
     
     <body>
-            
+       
+      <div id="navPartial"></div>
         
-       <div id="navPartial"></div>
-        <H1>brewProfile</H1>
-        <div id="jsonDump"></div>
-        
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+       
+                
+                <H1 id="brewName">Brew Name</H1>
+                <button id="cafeButton" onclick='' type='button' class='list-group-item'>cafe Name</button>              
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>
 
@@ -53,13 +63,49 @@
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
     
-    $.get( "http://dev2.ldorrough.com/caves/", function( data ) {
-          $("#jsonDump").append(data[0].name);
-          
-        });
+        
+        var query = "http://dev2.ldorrough.com/brews/" + localStorage.getItem('brewId');
+        console.log(query);
+        
+     $.get( query, function( data ) {
+         console.log("done");
+         console.log(data);
+       
+         
+         $("#brewName").html(data.name);
+         $("#cafeButton").html(data.cafe);
+         
+         
+         
+         $("#cafeButton").attr("onclick","loadPage(" + 
+      
+
+    });
+    
+     
+    
+       
+
    
     
 });
+    
+function convertToSlug(Text)
+{
+    Text = Text.toLowerCase();
+    Text = Text.replace(/[^\w ]+/g,'');
+    Text = Text.replace(/ +/g,'-');
+    return Text
+}
+    
+function loadPage(id){
+        localStorage.setItem('brewId', id);
+        window.location.href = "brewProfile.html";
+        
+    }
+    
+    
+    
 
 
 </script>

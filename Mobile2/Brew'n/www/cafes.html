@@ -39,13 +39,22 @@
     </head>
     
     <body>
+        <div id="navPartial"></div>
+        
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
        
-      
-        
-       <div id="navPartial"></div>
-        <H1>Cafes</H1>
-        <div id="jsonDump"></div>
-        
+               
+                <H1>Cafes</H1>
+                
+
+                <div id = "jsonDump" class="list-group">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>
 
@@ -55,8 +64,9 @@ $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
     
      $.get( "http://dev2.ldorrough.com/caves/", function( data ) {
+         $("#jsonDump").empty();
          for(i = 0; i < data.length; i++){
-            $("#jsonDump").append(data[i].name + "<hr>");
+            $("#jsonDump").append(" <button onclick='loadPage(" + data[i].id + ");' type='button' class='list-group-item'>" + data[i].name + "</button>");
          }
         
         });
@@ -64,5 +74,10 @@ $( document ).ready(function() {
     
 });
 
+    function loadPage(id){
+        localStorage.setItem('cafeId', id);
+        window.location.href = "cafeProfile.html";
+        
+    }
 
 </script>

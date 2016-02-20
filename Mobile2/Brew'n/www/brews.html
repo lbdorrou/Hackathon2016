@@ -39,12 +39,24 @@
     </head>
     
     <body>
-            
+        <div id="navPartial"></div>
         
-       <div id="navPartial"></div>
-        <H1>Brews</H1>
-        <div id="jsonDump"></div>
-        
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+       
+               
+                <H1>Brews</H1>
+                <a href="createBrew.html" class="btn btn-default">New Brew</a>
+                <hr>
+                
+
+                <div id = "jsonDump" class="list-group">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>
 
@@ -53,9 +65,11 @@
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
     
-    $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
+     $.get( "http://dev2.ldorrough.com/brews/", function( data ) {
+         $("#jsonDump").empty();
+         console.log(data);
          for(i = 0; i < data.length; i++){
-            $("#jsonDump").append(data[i].cafe + "<hr>");
+            $("#jsonDump").append(" <button onclick='loadPage(" + data[i].id + ");' type='button' class='list-group-item'>" + data[i].name + "</button>");
          }
         
         });
@@ -63,5 +77,10 @@ $( document ).ready(function() {
     
 });
 
+    function loadPage(id){
+        localStorage.setItem('brewId', id);
+        window.location.href = "brewProfile.html";
+        
+    }
 
 </script>

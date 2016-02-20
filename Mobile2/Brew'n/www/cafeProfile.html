@@ -40,12 +40,34 @@
     
     <body>
        
-      
+      <div id="navPartial"></div>
         
-       <div id="navPartial"></div>
-        <H1>CafeProfile</H1>
-        <div id="jsonDump"></div>
-        
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+       
+               
+                <H1 id="cafeName">Cafe Name</H1>
+                
+               
+                <H2>Brews</H2>
+
+                <div id = "jsonDump" class="list-group"></div>
+                    
+                <H2>Location</H2>
+                <iframe
+                 id="cafeMap"
+                  width="100%"
+                  height="300px"
+                  frameborder="0" style="border:0"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyALWia9fQBmsa52pKCaV6QVbpnTTDq05ZQ
+                    &q=Space+Needle,Seattle+WA" allowfullscreen>
+                </iframe>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 </html>
 
@@ -54,13 +76,44 @@
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
     
-    $.get( "http://dev2.ldorrough.com/caves/", function( data ) {
-          $("#jsonDump").append(data[0].name);
-          
-        });
+        
+        var query = "http://dev2.ldorrough.com/caves/" + localStorage.getItem('cafeId');
+        console.log(query);
+        
+     $.get( query, function( data ) {
+         console.log("done");
+        console.log(data);
+       
+         $("#cafeMap").attr("src","https://www.google.com/maps/embed/v1/place?key=AIzaSyALWia9fQBmsa52pKCaV6QVbpnTTDq05ZQ&q=" + convertToSlug(data.location))
+         $("#cafeName").html(data.name);
+      
+
+    });
+    
+     $.get( "http://dev2.ldorrough.com/caves/", function( data ) {
+         $("#jsonDump").empty();
+         for(i = 0; i < data.length; i++){
+            $("#jsonDump").append(" <button type='button' class='list-group-item'>" + data[i].name + "</button>");
+         }
+        
+    });
+    
+       
+
    
     
 });
+    
+function convertToSlug(Text)
+{
+    Text = Text.toLowerCase();
+    Text = Text.replace(/[^\w ]+/g,'');
+    Text = Text.replace(/ +/g,'-');
+    return Text
+}
+    
+    
+    
 
 
 </script>
