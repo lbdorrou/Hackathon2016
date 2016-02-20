@@ -48,7 +48,8 @@
        
                 
                 <H1 id="brewName">Brew Name</H1>
-                <button id="cafeButton" onclick='' type='button' class='list-group-item'>cafe Name</button>              
+                <H3 id="cafeButton">cafe Name</h3>
+                <button id="cafeButton" onclick='loadPage()' type='button' class='list-group-item'>Checkin</button>
 
                     
                 </div>
@@ -59,7 +60,8 @@
 </html>
 
 <script>
-           
+var thisId;       
+    
 $( document ).ready(function() {
    $( "#navPartial" ).load( "nav.html" );
     
@@ -71,7 +73,7 @@ $( document ).ready(function() {
          console.log("done");
          console.log(data);
        
-         
+         thisId = data.id;
          $("#brewName").html(data.name);
          $("#cafeButton").html(data.cafe);
          
@@ -95,9 +97,9 @@ function convertToSlug(Text)
     return Text
 }
     
-function loadPage(id){
-        localStorage.setItem('brewId', id);
-        window.location.href = "brewProfile.html";
+function loadPage(){
+        localStorage.setItem('brewId', thisId);
+        window.location.href = "newCheckIn.html";
         
     }
     
