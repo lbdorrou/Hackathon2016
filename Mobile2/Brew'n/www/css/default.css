@@ -56,3 +56,8 @@
     width: 10px;
     overflow: hidden;
 }
+
+
+body {
+     background-image: url(../img/white_bed_sheet.png);
+}

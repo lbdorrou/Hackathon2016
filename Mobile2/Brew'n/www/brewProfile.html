@@ -41,15 +41,20 @@
     <body>
        
       <div id="navPartial"></div>
+        <div style="height: 100px; overflow:hidden;">
+            <img src="img/coffee-beans.png"  style="margin-top: 0px; width: 100%">
+        </div>
         
-        <div class="container">
+        <div class="container" style="margin-top: -75px">
         <div class="row">
             <div class="col-md-12">
        
                 
-                <H1 id="brewName">Brew Name</H1>
-                <H3 id="cafeButton">cafe Name</h3>
-                <button id="cafeButton" onclick='loadPage()' type='button' class='list-group-item'>Checkin</button>
+                <H1 id="brewName" style="color:white">Brew Name</H1>
+                <hr>
+                <H4 id="cafeButton">cafe Name</h4>
+                <H4 id="roast">Roast</H4>
+                <button id="cafeButton" onclick='loadPage()' type='button' class='list-group-item'>Check In</button>
 
                     
                 </div>
@@ -76,6 +81,7 @@ $( document ).ready(function() {
          thisId = data.id;
          $("#brewName").html(data.name);
          $("#cafeButton").html(data.cafe);
+         $("#roast").html(data.roast + " Roast");
          
       
 
